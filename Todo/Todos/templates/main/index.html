@@ -2,26 +2,23 @@
 
 {% block content %}
     <h1> To Do App </h1>
-    <div class="row">
+    <div class="row mt-4">
         <div class = "col">
             <h2> Add Item </h2>
-            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputGroupUsername" placeholder="Enter new task">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <form action="add_todo/" method="POST" class="form-inline">
+                {% csrf_token %}
+                <input type="text" name="content" class="form-control mb-2 mr-sm-2" id="inlineFormInputGroupUsername" placeholder="Enter new task">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-4">
         <div class="col">
             <ul class="list-group">
-                <li class="list-group-item">A simple default list group item</li>
-                <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
-                <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
-                <li class="list-group-item list-group-item-success">A simple success list group item</li>
-                <li class="list-group-item list-group-item-danger">A simple danger list group item</li>
-                <li class="list-group-item list-group-item-warning">A simple warning list group item</li>
-                <li class="list-group-item list-group-item-info">A simple info list group item</li>
-                <li class="list-group-item list-group-item-light">A simple light list group item</li>
-                <li class="list-group-item list-group-item-dark">A simple dark list group item</li>
+                {% for todo_item in todo_items %}
+                    <li class="list-group-item">{{ todo_item.text }}</li>
+                {% endfor %}
             </ul>
         </div>
     </div>
