@@ -15,3 +15,8 @@ def add_todo(request):
     content = request.POST['content']
     NewItem = Tasks.objects.create(added_date=current_date, text=content)
     return HttpResponseRedirect("/")
+
+csrf_exempt
+def delete_todo(request, todo_id):
+    Tasks.objects.get(id=todo_id).delete()
+    return HttpResponseRedirect("/")
